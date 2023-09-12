@@ -9,12 +9,13 @@ import { LoginComponent } from './login/login.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { PermissionsService } from './services/permissions.service';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'products', component: ProductsComponent},
   {path:'shopping-cart', component: ShoppingCartComponent},
-  {path:'check-out', component: CheckOutComponent},
+  {path:'check-out', component: CheckOutComponent, canActivate:[PermissionsService]},
   {path:'order-success', component: OrderSuccessComponent},
   {path:'login', component: LoginComponent},
   {path:'admin/products', component: AdminProductsComponent},
