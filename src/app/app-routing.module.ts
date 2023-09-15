@@ -10,6 +10,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { PermissionsService } from './services/permissions.service';
+import { AdminPermissionsService } from './services/admin-permissions.service';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -21,8 +22,8 @@ const routes: Routes = [
   {path:'order-success', component: OrderSuccessComponent, canActivate:[PermissionsService]},
   {path:'my/orders', component: MyOrdersComponent, canActivate:[PermissionsService]},
 
-  {path:'admin/products', component: AdminProductsComponent, canActivate:[PermissionsService]},
-  {path:'admin/orders', component: AdminOrdersComponent, canActivate:[PermissionsService]},
+  {path:'admin/products', component: AdminProductsComponent, canActivate:[PermissionsService, AdminPermissionsService]},
+  {path:'admin/orders', component: AdminOrdersComponent, canActivate:[PermissionsService, AdminPermissionsService]},
 ];
 
 @NgModule({

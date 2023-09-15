@@ -6,6 +6,7 @@ import { AuthenticationService } from './authentication.service';
 @Injectable({
   providedIn: 'root'
 })
+//authguard
 export class PermissionsService implements CanActivate {
 
   constructor(private authService: AuthenticationService, private router: Router) { }
@@ -16,10 +17,9 @@ export class PermissionsService implements CanActivate {
         if(user){
           return true;
         }
-        this.router.navigate(['/login'],{queryParams:{returnUrl: state.url}})
+        this.router.navigate(['/login'])
         return false;
       })
     )
-    
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../services/authentication.service';
+import { UserService } from '../services/user.service';
+import { AppUser } from '../models/interfaces';
 
 
 @Component({
@@ -9,16 +11,23 @@ import { AuthenticationService } from '../services/authentication.service';
   templateUrl: './bs-navbar.component.html',
   styleUrls: ['./bs-navbar.component.css']
 })
-export class BsNavbarComponent implements OnInit, OnDestroy{
+export class BsNavbarComponent implements OnInit, OnDestroy {
 
   public user!: firebase.User | null;
+  public appUser!: AppUser | null;
   public subscriptions: Array<Subscription> = [];
 
-  constructor(private authService: AuthenticationService){}
+  constructor(private authService: AuthenticationService, private userService: UserService) { }
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.authService.getAuthState().subscribe(user => this.user = user)
+      this.authService.getAuthState().subscribe(user => {
+        this.user = user;
+        if (this.user) {
+          this.userService.saveUser(this.user);
+          this.getAppUser();
+        }
+      })
     );
   }
 
@@ -26,7 +35,16 @@ export class BsNavbarComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach(subscriptions => subscriptions.unsubscribe())
   }
 
-  public logout(): void{   
+  public logout(): void {
     this.authService.logout();
+  }
+
+  public getAppUser() {
+    this.subscriptions.push(
+      this.userService.getUser(this.user!.uid).valueChanges().subscribe(appUser => {
+        this.appUser = appUser
+        }
+      )
+    )
   }
 }
