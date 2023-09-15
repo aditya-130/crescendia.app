@@ -8,17 +8,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
- constructor(private authService: AuthenticationService, private router: Router){
-  authService.getAuthState().subscribe(user => {
-    if(user){
-      let returnUrl = localStorage.getItem('returnUrl');
-      if(returnUrl){
-        router.navigateByUrl(returnUrl);
-      }
-      else{
-        router.navigate(['/']);
-      }
-    }
-  })
- }
+ constructor(){}
 }
