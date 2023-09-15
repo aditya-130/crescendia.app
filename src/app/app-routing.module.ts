@@ -14,13 +14,15 @@ import { PermissionsService } from './services/permissions.service';
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'products', component: ProductsComponent},
-  {path:'shopping-cart', component: ShoppingCartComponent},
-  {path:'check-out', component: CheckOutComponent, canActivate:[PermissionsService]},
-  {path:'order-success', component: OrderSuccessComponent},
   {path:'login', component: LoginComponent},
-  {path:'admin/products', component: AdminProductsComponent},
-  {path:'admin/orders', component: AdminOrdersComponent},
-  {path:'my/orders', component: MyOrdersComponent}
+  {path:'shopping-cart', component: ShoppingCartComponent},
+
+  {path:'check-out', component: CheckOutComponent, canActivate:[PermissionsService]},
+  {path:'order-success', component: OrderSuccessComponent, canActivate:[PermissionsService]},
+  {path:'my/orders', component: MyOrdersComponent, canActivate:[PermissionsService]},
+
+  {path:'admin/products', component: AdminProductsComponent, canActivate:[PermissionsService]},
+  {path:'admin/orders', component: AdminOrdersComponent, canActivate:[PermissionsService]},
 ];
 
 @NgModule({
