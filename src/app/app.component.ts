@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'crescendia.app';
+ constructor(private authService: AuthenticationService, private router: Router){
+  authService.getAuthState().subscribe(user => {
+    if(user){
+      let returnUrl = localStorage.getItem('returnUrl');
+      if(returnUrl){
+        router.navigateByUrl(returnUrl);
+      }
+      else{
+        router.navigate(['/']);
+      }
+    }
+  })
+ }
 }
