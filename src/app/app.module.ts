@@ -17,6 +17,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { environment } from 'src/environments/environment.development';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ShoppingCartComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
-    BsNavbarComponent
+    BsNavbarComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
